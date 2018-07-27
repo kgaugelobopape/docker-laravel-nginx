@@ -45,7 +45,7 @@ class AuthController extends Controller
         DB::table('user_verifications')->insert(['user_id' => $user->id, 'token' => $verification_code]);
 
         $subject = "Please verify your email address.";
-//        try {
+        try {
 
             Mail::send('email.verify', ['name' => $name, 'verification_code' => $verification_code],
                 function ($mail) use ($email, $name, $subject) {
@@ -55,9 +55,9 @@ class AuthController extends Controller
                 });
 
             return response()->json(['success' => true, 'message' => 'Thanks for signing up! Please check your email to complete your registration.']);
-//        } catch (\Exception $e) {
-//            return response()->json(['success' => false, 'message' => 'Whoops! Looks like something went wrong.']);
-//        }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Whoops! Looks like something went wrong.']);
+        }
     }
 
     /**

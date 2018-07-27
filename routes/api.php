@@ -26,3 +26,5 @@ Route::group(['middleware' => ['jwt.auth']], function() {
         return response()->json(['foo'=>'bar']);
     });
 });
+
+Route::post('/email/transaction/mpaa', 'MailerController@sendEmailForMpaa');
